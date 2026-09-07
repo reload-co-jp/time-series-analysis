@@ -1,0 +1,658 @@
+[
+  {
+    "slug": "wold-representation-theorem",
+    "category": "理論的基盤",
+    "title": "Woldの表現定理",
+    "description": "任意の弱定常過程を過去の独立なショックの線形和として表現できることを保証する定理。AR/MAモデルが妥当である数理的根拠。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "なぜ複雑な現実の時系列データをAR(自己回帰)モデルやMA(移動平均)モデルといった線形数式で近似してよいのか。その数理的根拠を与えるのがWoldの表現定理である。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "ヒルベルト空間と直交射影"
+      },
+      {
+        "type": "paragraph",
+        "text": "決定論的トレンドを除去した任意の弱定常過程Xtは、平均0・分散有限の確率変数が作る広義のヒルベルト空間L^2上のベクトルとみなせる。時刻t-1までの過去の全データが張る閉部分空間をM(t-1)とするとき、今日のデータXtを過去の情報空間へ写像する操作は直交射影によって定義される。"
+      },
+      {
+        "type": "math",
+        "tex": "\\hat{X}_t = P_{\\mathcal{M}_{t-1}} X_t"
+      },
+      {
+        "type": "note",
+        "text": "ある点から平面への最短距離が垂直に下ろした線であるのと同様、予測誤差の分散を最小にする線形予測値は、過去の空間へ垂直に射影したベクトルとなる。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Woldの分解"
+      },
+      {
+        "type": "paragraph",
+        "text": "この射影操作を過去に向かって再帰的に繰り返すと、任意の弱定常過程は、過去のイノベーションの無限和(純非決定論的成分)と、過去の情報から誤差なく予測できる成分(決定論的成分Vt)の和へと一意に分解できる。"
+      },
+      {
+        "type": "math",
+        "tex": "X_t = \\sum_{j=0}^{\\infty} \\psi_j \\epsilon_{t-j} + V_t \\quad \\left(\\psi_0 = 1,\\ \\sum_{j=0}^{\\infty} \\psi_j^2 < \\infty\\right)"
+      },
+      {
+        "type": "paragraph",
+        "text": "無限個のパラメータψj(動学ウェイト、MA係数)は、j期前に発生したショックが当期のXtにどれだけ残存しているかを示す感度(インパルス応答)を意味する。ウェイトの二乗和が有限に収束する二乗可和条件が、過去の記憶が適切に減衰していく挙動を担保し、定常性の必要十分条件となる。"
+      },
+      {
+        "type": "note",
+        "text": "この定理により、いかなる複雑な定常データも本質的には過去の独立なショックの線形積算(MA(∞)過程)として代数的に還元できることが保証される。"
+      }
+    ],
+    "relatedMethods": ["autocorrelation", "lag-operator-box-jenkins"],
+    "relatedExamples": []
+  },
+  {
+    "slug": "lag-operator-box-jenkins",
+    "category": "理論的基盤",
+    "title": "ラグ演算子とBox-Jenkins法",
+    "description": "無限次元のMA(∞)過程を有限パラメータのARMAモデルへ縮約する代数的枠組みと、その同定・推定・診断の手続き。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "Woldの表現定理が保証するMA(∞)過程は、パラメータが無限個存在するためそのままでは推定できない。そこで、実用的な有限個のパラメータで近似モデルを同定・推定・診断する枠組みがBox-Jenkins法(ARIMAモデル)である。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "ラグ演算子"
+      },
+      {
+        "type": "paragraph",
+        "text": "時間のインデックスを含む差分方程式の取り扱いを容易にするため、時間を1期バックさせる多項式演算子zを導入する。"
+      },
+      {
+        "type": "math",
+        "tex": "z X_t = X_{t-1}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "ARMA(p, q)の代数化"
+      },
+      {
+        "type": "paragraph",
+        "text": "ラグ演算子を適用する前の原形は、過去p期の自己履歴(AR成分)と過去q期のイノベーション履歴(MA成分)の線形結合である。"
+      },
+      {
+        "type": "math",
+        "tex": "X_t = \\phi_1 X_{t-1} + \\cdots + \\phi_p X_{t-p} + \\epsilon_t + \\theta_1 \\epsilon_{t-1} + \\cdots + \\theta_q \\epsilon_{t-q}"
+      },
+      {
+        "type": "paragraph",
+        "text": "ラグ演算子で整理すると、AR多項式Φ(z)とMA多項式Θ(z)による因数分解形が得られる。"
+      },
+      {
+        "type": "math",
+        "tex": "\\Phi(z) X_t = \\Theta(z) \\epsilon_t \\quad \\Phi(z) = 1 - \\phi_1 z - \\cdots - \\phi_p z^p,\\ \\ \\Theta(z) = 1 + \\theta_1 z + \\cdots + \\theta_q z^q"
+      },
+      {
+        "type": "list",
+        "ordered": true,
+        "items": [
+          "同定(Identification): ACF/PACFの減衰パターンから次数p, qの候補を絞る",
+          "推定(Estimation): 最尤法などでパラメータφ, θを推定する",
+          "診断(Diagnostic checking): 残差の自己相関検定でモデルの適合を確認する"
+        ]
+      }
+    ],
+    "relatedMethods": [
+      "wold-representation-theorem",
+      "arima",
+      "unit-root-spurious-regression"
+    ],
+    "relatedExamples": []
+  },
+  {
+    "slug": "unit-root-spurious-regression",
+    "category": "理論的基盤",
+    "title": "単位根過程と見せかけの回帰",
+    "description": "非定常性が中心極限定理を崩壊させ、無関係な系列間に見かけ上の相関を生む問題と、その識別・対処法。",
+    "blocks": [
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "特性方程式と単位根"
+      },
+      {
+        "type": "paragraph",
+        "text": "システム固有の動学特性を調べるため外部ショックを遮断(εt=0)すると、自律的な同次方程式に帰着する。AR(1)モデルにラグ演算子を適用し整理すると、次の特性方程式が得られる。"
+      },
+      {
+        "type": "math",
+        "tex": "X_t = \\phi_1 X_{t-1} + \\epsilon_t \\ \\Rightarrow\\ (1 - \\phi_1 z) X_t = \\epsilon_t \\ \\Rightarrow\\ 1 - \\phi_1 z = 0"
+      },
+      {
+        "type": "paragraph",
+        "text": "この方程式の根はz = 1/φ1となる。φ1 = 1のとき根がちょうどz = 1となる現象を単位根(Unit Root)と呼ぶ。"
+      },
+      {
+        "type": "list",
+        "items": [
+          "|z| > 1(単位円の外側): φ < 1であり、過去のショックを忘却して平均へ回帰する(定常)",
+          "z = 1(単位円の境界線上): φ = 1のランダムウォーク状態。統計学的な構造変化を引き起こす"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "中心極限定理の崩壊と見せかけの回帰"
+      },
+      {
+        "type": "paragraph",
+        "text": "単位根過程では分散がtの速度で爆発し強烈な自己相関が持続するため、サンプルサイズを無限大に飛ばしても平均や変動が正規分布に収束しない。分母の拡張速度が通常のsqrt(T)を超えてTの2乗の速度で急膨張し、漸近分布はディッキー・フラー(DF)分布に代表される非標準的な分布に従う。"
+      },
+      {
+        "type": "note",
+        "text": "本来無関係な単位根過程同士を回帰分析にかけると、通常のt検定の臨界値(1.96など)が通用せず、高い確率で「有意な因果関係がある」と誤診する。これが見せかけの回帰(Spurious Regression)である。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "対処法"
+      },
+      {
+        "type": "list",
+        "ordered": true,
+        "items": [
+          "ADF検定(Augmented Dickey-Fuller test)による単位根の確認",
+          "差分系列の利用による定常化",
+          "コインテグレーション(共和分)関係の検出"
+        ]
+      },
+      {
+        "type": "code",
+        "language": "python",
+        "code": "from statsmodels.tsa.stattools import adfuller\n\nresult = adfuller(series)\nprint(f\"ADF statistic: {result[0]:.3f}, p-value: {result[1]:.3f}\")"
+      }
+    ],
+    "relatedMethods": [
+      "arima",
+      "lag-operator-box-jenkins",
+      "locally-stationary-process"
+    ],
+    "relatedExamples": ["random-walk-vs-ar1"]
+  },
+  {
+    "slug": "arch-garch",
+    "category": "古典的モデル",
+    "title": "ARCH/GARCHモデル",
+    "description": "誤差項の条件付き分散の時間変化を定式化し、ボラティリティ・クラスタリングを捉えるモデル。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "これまでの議論はデータの平均(期待値)が過去の情報にどう依存するかという条件付き平均の動学に焦点を当てていた。しかし金融時系列に顕著なボラティリティ・クラスタリング(変動の激しい時期が持続する現象)を捉えるには、分散そのものの動学変化を定式化する必要がある。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "ARCHモデル"
+      },
+      {
+        "type": "paragraph",
+        "text": "Engle (1982) が提示したARCH(p)モデルは、誤差項εtの条件付き分散htが、過去p期の誤差項の平方の線形結合で決定されると仮定する。"
+      },
+      {
+        "type": "math",
+        "tex": "\\epsilon_t = \\sqrt{h_t}\\, \\nu_t \\quad (\\nu_t \\sim \\text{i.i.d.}\\ N(0, 1))"
+      },
+      {
+        "type": "math",
+        "tex": "h_t = \\omega + \\sum_{i=1}^{p} \\alpha_i \\epsilon_{t-i}^2 \\quad (\\omega > 0,\\ \\alpha_i \\ge 0)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "GARCHモデルへの拡張"
+      },
+      {
+        "type": "paragraph",
+        "text": "Bollerslev (1986) は、ARCHモデルのラグ数が実務上肥大化する問題を解決するため、条件付き分散の式にそれ自体の自己回帰(ラグ項)を組み込んだGARCHモデルを開発した。平均の文脈におけるMAモデル(ARCH)をARMAモデル(GARCH)へ拡張したことに相当する。"
+      },
+      {
+        "type": "math",
+        "tex": "h_t = \\omega + \\sum_{i=1}^{p} \\alpha_i \\epsilon_{t-i}^2 + \\sum_{j=1}^{q} \\beta_j h_{t-j}"
+      },
+      {
+        "type": "note",
+        "text": "GARCHモデルは少数のパラメータで金融市場のショックの持続性とボラティリティの非線形動学を効率的に記述する、現代の実証ファイナンスに不可欠なインフラである。"
+      }
+    ],
+    "relatedMethods": ["arima", "charn-model"],
+    "relatedExamples": []
+  },
+  {
+    "slug": "autocorrelation",
+    "category": "基礎統計",
+    "title": "自己相関(ACF/PACF)",
+    "description": "時系列内の異なる時点間の相関を測る基礎的な指標。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "自己相関関数(ACF)は時点tと時点t-kの値の相関をラグkごとに示す。偏自己相関関数(PACF)は他の時点の影響を除いた直接的な相関を示す。"
+      },
+      {
+        "type": "math",
+        "tex": "\\rho_k = \\frac{\\gamma_k}{\\gamma_0} = \\frac{\\mathrm{Cov}(X_t, X_{t-k})}{\\mathrm{Var}(X_t)}"
+      },
+      {
+        "type": "list",
+        "items": [
+          "定常の世界: 過去の影響は時間とともに忘却され、ラグkが大きくなるにつれρkは速やかに0へ幾何級数的に減衰する",
+          "非定常(単位根)の世界: システムが無限の記憶を持つため、ラグkを離してもρkがほとんど減衰せず1に近い値を維持し続ける"
+        ]
+      },
+      {
+        "type": "note",
+        "text": "ARモデルの次数選定にはPACF、MAモデルの次数選定にはACFの減衰パターンが手がかりになる。定常・非定常の識別を見落とすと見せかけの回帰の罠に陥る。"
+      }
+    ],
+    "relatedMethods": [
+      "arima",
+      "wold-representation-theorem",
+      "cross-correlation",
+      "spectral-analysis"
+    ],
+    "relatedExamples": []
+  },
+  {
+    "slug": "arima",
+    "category": "古典的モデル",
+    "title": "ARIMA",
+    "description": "自己回帰和分移動平均モデル。定常化した系列に自己回帰・移動平均を適用する。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "非定常な系列を差分によって定常化した上で、自己回帰(AR)と移動平均(MA)の項を組み合わせて予測を行う。"
+      },
+      {
+        "type": "code",
+        "language": "text",
+        "code": "ARIMA(p, d, q)\np: AR次数, d: 差分階数, q: MA次数"
+      }
+    ],
+    "relatedMethods": [
+      "autocorrelation",
+      "kalman-filter",
+      "lag-operator-box-jenkins",
+      "unit-root-spurious-regression",
+      "arch-garch",
+      "information-criteria",
+      "state-space-model"
+    ],
+    "relatedExamples": ["airline-passengers-arima"]
+  },
+  {
+    "slug": "kalman-filter",
+    "category": "状態空間",
+    "title": "カルマンフィルタ",
+    "description": "状態空間モデルにおいて逐次的に状態を推定する手法。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "観測されない内部状態を、観測値の逐次更新によって推定する再帰的アルゴリズム。ノイズを含む観測から滑らかな状態推定を得る。"
+      },
+      {
+        "type": "list",
+        "items": ["予測ステップ(状態の時間発展)", "更新ステップ(観測による補正)"]
+      }
+    ],
+    "relatedMethods": ["arima", "state-space-model", "particle-filter"],
+    "relatedExamples": []
+  },
+  {
+    "slug": "cross-correlation",
+    "category": "基礎統計",
+    "title": "相互共分散関数と相互相関関数",
+    "description": "2つの時系列の間の時間差を伴う関係性を測る指標。どちらの系列が他方に先行するかを判定できる。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "自己相関が単一系列内の異なる時点間の関係を測るのに対し、相互相関は2つの異なる系列XとYの間の、時間差kを伴う関係を測る。"
+      },
+      {
+        "type": "math",
+        "tex": "\\gamma_{xy}(k) = \\mathrm{Cov}(X_t, Y_{t-k})"
+      },
+      {
+        "type": "math",
+        "tex": "\\rho_{xy}(k) = \\frac{\\gamma_{xy}(k)}{\\sqrt{\\gamma_x(0)\\, \\gamma_y(0)}}"
+      },
+      {
+        "type": "note",
+        "text": "ラグkの符号に注意する。ρxy(k)がk>0側で大きな値を取ればXがYに先行する関係、k<0側で大きければYがXに先行する関係を示唆する。ラグをずらしながらピークの位置を探すことで、系列間の時間的な前後関係を推定できる。"
+      }
+    ],
+    "relatedMethods": ["autocorrelation", "spectral-analysis"],
+    "relatedExamples": []
+  },
+  {
+    "slug": "spectral-analysis",
+    "category": "基礎統計",
+    "title": "スペクトル解析とピリオドグラム",
+    "description": "自己共分散関数をフーリエ変換し、時系列に含まれる周期成分を周波数領域で捉える。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "時間領域での自己共分散関数は、周波数領域ではパワースペクトル密度に対応する。両者はフーリエ変換対で結ばれており、系列にどの周期の変動が強く含まれているかを可視化できる。"
+      },
+      {
+        "type": "math",
+        "tex": "f(\\omega) = \\frac{1}{2\\pi} \\sum_{k=-\\infty}^{\\infty} \\gamma_k e^{-ik\\omega} \\quad (-\\pi \\le \\omega \\le \\pi)"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "ピリオドグラム"
+      },
+      {
+        "type": "paragraph",
+        "text": "有限長の観測データからスペクトルを推定する最も基本的な方法がピリオドグラムであり、離散フーリエ変換の振幅の二乗として計算される。"
+      },
+      {
+        "type": "math",
+        "tex": "I(\\omega_j) = \\frac{1}{n} \\left| \\sum_{t=1}^{n} X_t e^{-i \\omega_j t} \\right|^2"
+      },
+      {
+        "type": "note",
+        "text": "ピリオドグラムは標本サイズを増やしても分散が縮小しない一致性を持たない推定量であるため、実用上は平滑化(スムージング)や窓関数を併用して安定したスペクトル推定量とする。"
+      }
+    ],
+    "relatedMethods": [
+      "cross-correlation",
+      "autocorrelation",
+      "locally-stationary-process",
+      "long-memory-process"
+    ],
+    "relatedExamples": []
+  },
+  {
+    "slug": "information-criteria",
+    "category": "理論的基盤",
+    "title": "情報量規準(AIC)とKullback-Leibler情報量",
+    "description": "モデルの当てはまりの良さと複雑さをトレードオフし、複数の候補モデルを比較・選択するための統計的基準。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "尤度を最大化するだけでは、パラメータ数を増やすほど見かけ上の当てはまりが向上してしまい過学習に陥る。真の分布とモデルの近さを測るKullback-Leibler(K-L)情報量に基づき、この過学習を補正する規準がAIC(赤池情報量規準)である。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "K-L情報量とバイアス補正"
+      },
+      {
+        "type": "paragraph",
+        "text": "真の分布とモデル分布のK-L情報量を最小化することは、モデルの対数尤度を最大化することとほぼ等価である。しかしパラメータをデータ自身から推定することが正のバイアスを生み、このバイアスは漸近的にパラメータ数kにほぼ等しいことが示される。対数尤度をkだけ補正することで、不偏に近いモデル評価量が得られる。"
+      },
+      {
+        "type": "math",
+        "tex": "\\mathrm{AIC} = -2 \\log L(\\hat{\\theta}) + 2k"
+      },
+      {
+        "type": "note",
+        "text": "AICが最小となるモデルを選ぶことで、当てはまりの良さと過学習の抑制をバランスさせる。ARMAモデルの次数p, qの決定にも標準的に用いられる。"
+      }
+    ],
+    "relatedMethods": ["lag-operator-box-jenkins", "wold-representation-theorem"],
+    "relatedExamples": []
+  },
+  {
+    "slug": "state-space-model",
+    "category": "状態空間",
+    "title": "状態空間モデル",
+    "description": "観測できない内部状態の時間発展と、状態から観測値が生成される過程を分離して定式化する一般的な枠組み。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "ARMAモデルを含む多くの時系列モデルは、観測されない状態ベクトルの時間発展を表すシステムモデルと、状態から観測値を生成する観測モデルの組として統一的に記述できる。"
+      },
+      {
+        "type": "math",
+        "tex": "x_t = F x_{t-1} + G v_t \\quad \\text{(システムモデル)}"
+      },
+      {
+        "type": "math",
+        "tex": "y_t = H x_t + w_t \\quad \\text{(観測モデル)}"
+      },
+      {
+        "type": "list",
+        "items": [
+          "トレンド・季節成分・AR成分など複数の変動要因を、状態ベクトルの各要素として同時に扱える",
+          "欠測値や不等間隔観測にも自然に対応できる",
+          "状態の推定には線形・ガウス型ならカルマンフィルタ、非線形・非ガウス型ならパーティクルフィルタを用いる"
+        ]
+      }
+    ],
+    "relatedMethods": ["kalman-filter", "particle-filter", "seasonal-decomposition"],
+    "relatedExamples": []
+  },
+  {
+    "slug": "particle-filter",
+    "category": "状態空間",
+    "title": "パーティクルフィルタ",
+    "description": "非線形・非ガウス型の状態空間モデルに対応する、逐次モンテカルロ法による状態推定。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "カルマンフィルタは状態遷移・観測が線形かつノイズがガウス分布に従う場合にのみ厳密な解を与える。非線形な状態遷移や非ガウス型のノイズを扱うには、状態の分布を多数の重み付き粒子(パーティクル)で近似する逐次モンテカルロ法、すなわちパーティクルフィルタが用いられる。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "基本的な流れ"
+      },
+      {
+        "type": "list",
+        "ordered": true,
+        "items": [
+          "予測: 各粒子をシステムモデルに従って1期先へ遷移させる",
+          "更新: 観測値との整合度に応じて各粒子の重みを更新する",
+          "リサンプリング: 重みの偏りが大きくなった粒子群を、重みに比例した確率で再抽出し多様性を保つ"
+        ]
+      },
+      {
+        "type": "note",
+        "text": "粒子数を増やすほど近似精度は向上するが計算コストも増大するため、実務では両者のバランスを取る。"
+      }
+    ],
+    "relatedMethods": ["state-space-model", "kalman-filter"],
+    "relatedExamples": []
+  },
+  {
+    "slug": "seasonal-decomposition",
+    "category": "古典的モデル",
+    "title": "季節調整モデル(成分分解)",
+    "description": "時系列をトレンド・季節・不規則成分に分解し、季節性を除去した基調や周期変動を取り出す。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "月次・四半期データなど季節性を持つ系列は、長期的なトレンド成分、周期的な季節成分、それらで説明できない不規則成分(残差)の和として分解できる。"
+      },
+      {
+        "type": "math",
+        "tex": "X_t = T_t + S_t + I_t"
+      },
+      {
+        "type": "paragraph",
+        "text": "状態空間モデルの枠組みでは、トレンドと季節成分をそれぞれ確率的に緩やかに変化する状態として定式化し、カルマンフィルタ・平滑化によって同時に推定する。これにより移動平均に基づく古典的な方法よりも、成分の構造変化に柔軟に追従できる。"
+      },
+      {
+        "type": "note",
+        "text": "季節調整値(トレンド+不規則、あるいはトレンドのみ)は、季節性による見かけの変動を取り除いて基調を把握する際に用いられる。"
+      }
+    ],
+    "relatedMethods": ["state-space-model", "autocorrelation"],
+    "relatedExamples": ["airline-seasonal-decomposition"]
+  },
+  {
+    "slug": "long-memory-process",
+    "category": "理論的基盤",
+    "title": "長期記憶過程とFARIMAモデル",
+    "description": "自己共分散の総和が発散するほど緩やかに依存が持続する長期記憶過程と、それを記述するFARIMAモデル。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "通常の時系列解析では、自己共分散関数R(l)の絶対値和が有限である短期記憶過程を前提とすることが多い。しかし水文学や経済学では、この前提が成り立たないデータが報告されている。"
+      },
+      {
+        "type": "math",
+        "tex": "\\sum_{l=-\\infty}^{\\infty} |R(l)| < \\infty \\quad \\text{(短期記憶過程)}"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Hurst指数と長期記憶性"
+      },
+      {
+        "type": "paragraph",
+        "text": "Hurst (1951) はナイル川の水位の観測から、自己共分散が次のように緩やかにしか減衰しないことを見出した。"
+      },
+      {
+        "type": "math",
+        "tex": "R(l) = O(l^{2H-2}), \\quad 1/2 < H < 1"
+      },
+      {
+        "type": "note",
+        "text": "このときΣ|R(l)|は発散し、長期記憶過程と呼ばれる。日経平均やS&P500のような総合指標も長期記憶性を持つことが実証的に知られている。Granger (1980) は、短期記憶過程を多数集計(aggregation)すると長期記憶過程が生まれることを理論的に示した。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "FARIMA(p, d, q)モデル"
+      },
+      {
+        "type": "paragraph",
+        "text": "長期記憶性を持つ代表的なスペクトル密度関数は、分数和分ARIMA(FARIMA)モデルにより次の形で与えられる。"
+      },
+      {
+        "type": "math",
+        "tex": "f(\\lambda) = \\frac{1}{2\\pi} \\cdot \\frac{1}{|1 - e^{i\\lambda}|^{2d}} \\cdot \\frac{\\left|\\sum_{j=0}^{q} \\alpha_j e^{-ij\\lambda}\\right|^2}{\\left|\\sum_{j=0}^{p} \\beta_j e^{-ij\\lambda}\\right|^2}"
+      },
+      {
+        "type": "note",
+        "text": "分数差分パラメータdとHurst指数Hの間にはd = H - 1/2という関係がある。dが非整数であることが、通常のARIMAの整数階差分では捉えられない緩やかな記憶減衰を表現する。"
+      }
+    ],
+    "relatedMethods": ["autocorrelation", "spectral-analysis", "lag-operator-box-jenkins"],
+    "relatedExamples": []
+  },
+  {
+    "slug": "locally-stationary-process",
+    "category": "理論的基盤",
+    "title": "局所定常過程",
+    "description": "スペクトル構造が時間とともに滑らかに変化する非定常過程を扱う枠組み。単位根とは異なる形の非定常性を記述する。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "単位根過程は非定常性の一形態だが、現実のデータでは分散や周期構造そのものが時間とともに緩やかに変化するタイプの非定常性もよく見られる。Dahlhaus (2000) はこれを局所定常過程として定式化した。"
+      },
+      {
+        "type": "paragraph",
+        "text": "観測時点tを標本サイズnで基準化した相対時刻u = t/nを導入し、時刻ごとに異なるスペクトル構造を滑らかな関数として表現する。"
+      },
+      {
+        "type": "math",
+        "tex": "f(u, \\lambda) \\equiv A(u, \\lambda)\\, \\Omega\\, A(u, \\lambda)^{*}"
+      },
+      {
+        "type": "note",
+        "text": "f(u, λ)は時変スペクトル行列と呼ばれる。uを固定すればその近傍では通常の定常過程とみなせるが、uを動かすとスペクトル構造(周期性や分散)が緩やかに変化していく。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "分類・判別への応用"
+      },
+      {
+        "type": "paragraph",
+        "text": "2つの局所定常過程の候補モデルf(u, λ)、g(u, λ)のどちらに観測データが従うかを、divergence(距離的な統計量)に基づいて判別する方法も研究されている。日次株価収益率の時変スペクトルに基づき、業種ごとの類似度で企業を階層的にクラスタリングした実証研究例もある。"
+      }
+    ],
+    "relatedMethods": ["unit-root-spurious-regression", "spectral-analysis"],
+    "relatedExamples": []
+  },
+  {
+    "slug": "lan-theory",
+    "category": "理論的基盤",
+    "title": "局所漸近正規性(LAN)と最適推測",
+    "description": "尤度比の局所的な振る舞いを正規分布で近似する性質に基づき、推定量・検定の漸近的な最適性を議論する理論的枠組み。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "パラメータθの近傍で対数尤度比がある種の二次形式に確率展開できるとき、その統計モデルは局所漸近正規性(Local Asymptotic Normality, LAN)を持つという。"
+      },
+      {
+        "type": "math",
+        "tex": "\\Lambda_n(\\theta, \\theta_n) = h' \\Delta_n - \\frac{1}{2} h' \\Gamma(\\theta) h + o_p(1), \\quad \\theta_n = \\theta + n^{-1/2} h"
+      },
+      {
+        "type": "paragraph",
+        "text": "ここでΔnはスコア関数に相当する統計量、Γ(θ)はFisher情報量行列である。LAN性が示されると、推定量のクラスの中で漸近分散がΓ(θ)の逆行列を下回れないという効率限界(漸近下限)が導かれ、最尤推定量がこの限界を達成する最適推定量であることが示される。"
+      },
+      {
+        "type": "note",
+        "text": "この枠組みは独立標本の古典的な最尤理論を、時系列のような従属標本・非定常過程・非線形モデルへ拡張したものであり、CHARNモデルや局所定常過程の推定理論の基盤となっている。"
+      }
+    ],
+    "relatedMethods": ["charn-model", "locally-stationary-process"],
+    "relatedExamples": []
+  },
+  {
+    "slug": "charn-model",
+    "category": "古典的モデル",
+    "title": "CHARNモデル(非線形条件付き分散モデル)",
+    "description": "ARCHモデルを一般化し、平均・分散の両方を非線形関数で表現する条件付き異分散自己回帰モデル。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "ARCHモデルは分散の動学のみを扱うが、実データでは平均項も非線形な依存構造を持つことがある。Conditional Heteroscedastic AutoRegressive Nonlinear Model(CHARN)は、平均項Fと分散項(のスケール)Hをともに非線形関数として表現する一般的な枠組みである。"
+      },
+      {
+        "type": "math",
+        "tex": "X_t = F(X_{t-1}, \\dots, X_{t-p}) + H(X_{t-1}, \\dots, X_{t-q})\\, U_t, \\quad \\{U_t\\} \\sim \\text{i.i.d.}(0, V)"
+      },
+      {
+        "type": "note",
+        "text": "FとHを既知母数の滑らかな関数として特定すれば、局所漸近正規性の理論に基づく最尤法による推定・検定・判別が可能になる。脳波と筋電位のような多変量生体信号の解析にも応用されている。"
+      }
+    ],
+    "relatedMethods": ["arch-garch", "lan-theory"],
+    "relatedExamples": []
+  },
+  {
+    "slug": "portfolio-optimization",
+    "category": "古典的モデル",
+    "title": "統計的最適ポートフォリオ理論",
+    "description": "資産収益率の時系列としての依存構造を考慮し、期待収益とリスクをバランスさせる分散投資比率を推定する。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "m個の金融資産への配分比率(ポートフォリオ係数)α = (α1, ..., αm)を、収益率の期待値を高めつつ分散(リスク)を抑えるよう決定する問題を考える。"
+      },
+      {
+        "type": "math",
+        "tex": "\\alpha_{opt} \\equiv \\arg\\max_{\\alpha} \\{\\mu(\\alpha) - \\beta\\, V(\\alpha)\\}"
+      },
+      {
+        "type": "paragraph",
+        "text": "資産収益率を定常過程とみなし、平均μ・分散Vを標本平均・標本分散で置き換えたものが古典的な平均・分散ポートフォリオ推定量である。しかし収益率過程が一般的な従属構造(VARMAなど)を持つとき、この素朴な推定量は必ずしも統計的に最適とは限らない。"
+      },
+      {
+        "type": "note",
+        "text": "資産のスペクトル密度行列を用いた漸近理論により、どのような条件下で平均・分散推定量が最適になるか(あるいはならないか)が明らかにされている。公的年金積立金の運用シミュレーションなど、実務にも応用されている。"
+      }
+    ],
+    "relatedMethods": ["charn-model", "spectral-analysis"],
+    "relatedExamples": []
+  }
+]

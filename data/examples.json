@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "random-walk-vs-ar1",
+    "title": "ランダムウォークとAR(1)定常過程の比較",
+    "description": "単位根を持つランダムウォークと、定常なAR(1)過程を同一条件のショックから合成し、系列の振る舞いの違いを可視化する。",
+    "methodSlug": "unit-root-spurious-regression",
+    "seriesRef": "random-walk-vs-ar1",
+    "chartType": "multi-line",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "同じ正規乱数のショック系列から、単位根過程(ランダムウォーク: Xt = Xt-1 + εt)と定常なAR(1)過程(Xt = 0.6 Xt-1 + εt)を生成した。"
+      },
+      {
+        "type": "chart",
+        "seriesRef": "random-walk-vs-ar1",
+        "chartType": "multi-line",
+        "caption": "ランダムウォーク(単位根)とAR(1)定常過程(φ=0.6)の推移"
+      },
+      {
+        "type": "note",
+        "text": "ランダムウォークは一定の水準に回帰せず分散が時間とともに拡大していく一方、AR(1)過程は0付近に留まり続ける。この違いがACFの減衰パターンや、見せかけの回帰の有無を左右する。"
+      }
+    ]
+  },
+  {
+    "slug": "airline-passengers-arima",
+    "title": "月間航空旅客数へのARIMA適用",
+    "description": "トレンドと季節性を持つ合成データにARIMAを適用する例。",
+    "methodSlug": "arima",
+    "seriesRef": "airline-passengers",
+    "chartType": "line",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "月次の旅客数データは右肩上がりのトレンドと年周期の季節性を持つ。差分と季節差分を組み合わせることで定常化し、ARIMAを適用できる。"
+      },
+      {
+        "type": "chart",
+        "seriesRef": "airline-passengers",
+        "chartType": "line",
+        "caption": "月間旅客数の推移(合成データ)"
+      },
+      {
+        "type": "note",
+        "text": "本データは説明用の合成データであり、実際の航空統計ではない。"
+      }
+    ]
+  },
+  {
+    "slug": "airline-seasonal-decomposition",
+    "title": "月間航空旅客数の季節調整",
+    "description": "月次データをトレンド・季節性・残差に分解し、成分ごとの変動を可視化する。",
+    "methodSlug": "seasonal-decomposition",
+    "seriesRef": "airline-passengers",
+    "chartType": "decomposition",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "月次の旅客数データには、右肩上がりのトレンドと年周期の季節パターンが重なっている。移動平均に基づく成分分解を適用し、原系列・トレンド・季節性・残差をそれぞれ可視化する。"
+      },
+      {
+        "type": "chart",
+        "seriesRef": "airline-passengers",
+        "chartType": "decomposition",
+        "caption": "月間旅客数の成分分解(トレンド・季節性・残差)"
+      },
+      {
+        "type": "note",
+        "text": "中心化移動平均は前後6か月分の窓を要するため、系列両端の数か月分はトレンド・残差が計算されない。より長い系列であれば季節指数はさらに安定する。"
+      }
+    ]
+  }
+]

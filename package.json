@@ -1,5 +1,5 @@
 {
-  "name": "page",
+  "name": "time-series-analysis",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -19,6 +19,7 @@
   "license": "ISC",
   "packageManager": "pnpm@11.21.0",
   "dependencies": {
+    "katex": "^0.18.6",
     "next": "^16.3.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
@@ -29,6 +30,7 @@
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.2",
+    "@types/katex": "^0.16.8",
     "@types/node": "^26.2.0",
     "@types/react": "^19.2.18",
     "@vitejs/plugin-react": "^6.1.0",
@@ -39,6 +41,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "jsdom": "^30.0.1",
     "prettier": "^3.9.6",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.66.0",
     "vitest": "^4.1.11"
   }
