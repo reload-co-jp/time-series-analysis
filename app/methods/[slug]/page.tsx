@@ -4,6 +4,7 @@ import { Blocks } from "@/components/content/blocks"
 import { PageTitle } from "@/components/elements/layout"
 import { Tag } from "@/components/elements/tag"
 import { RelatedLinks } from "@/components/elements/related-links"
+import { JsonLd, articleJsonLd, breadcrumbJsonLd } from "@/lib/jsonld"
 
 export const generateStaticParams = () =>
   getMethods().map((method) => ({ slug: method.slug }))
@@ -36,6 +37,19 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   return (
     <article>
+      <JsonLd
+        data={articleJsonLd({
+          headline: method.title,
+          description: method.description,
+          path: `/methods/${method.slug}/`,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "手法", path: "/methods/" },
+          { name: method.title, path: `/methods/${method.slug}/` },
+        ])}
+      />
       <Tag>{method.category}</Tag>
       <PageTitle style={{ marginTop: ".5rem" }}>{method.title}</PageTitle>
       <Blocks blocks={method.blocks} />

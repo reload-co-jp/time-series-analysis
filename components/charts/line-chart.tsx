@@ -41,16 +41,10 @@ export const LineChart: FC<{ data: SeriesFile; caption?: string }> = ({
     label: v.toFixed(0),
   }))
 
-  const label = data.unit
-    ? `${data.name}(${data.unit})`
-    : data.name
+  const label = data.unit ? `${data.name}(${data.unit})` : data.name
 
   return (
-    <figure
-      style={{ margin: 0 }}
-      role="img"
-      aria-label={caption ?? label}
-    >
+    <figure style={{ margin: 0 }} role="img" aria-label={caption ?? label}>
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         width="100%"

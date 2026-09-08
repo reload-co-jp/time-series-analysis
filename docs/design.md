@@ -77,15 +77,15 @@ type ContentBlock =
   | { type: "paragraph"; text: string }
   | { type: "heading"; level: 2 | 3; text: string }
   | { type: "list"; ordered?: boolean; items: string[] }
-  | { type: "math"; tex: string }            // 数式(表示は段階導入)
+  | { type: "math"; tex: string } // 数式(表示は段階導入)
   | { type: "code"; language: string; code: string }
   | { type: "chart"; seriesRef: string; chartType: ChartType; caption?: string }
-  | { type: "note"; text: string }           // 補足・示唆
+  | { type: "note"; text: string } // 補足・示唆
 
 type Lecture = {
   slug: string
-  order: number            // 体系的な学習順
-  chapter: string          // 章名(基礎/モデル/応用 など)
+  order: number // 体系的な学習順
+  chapter: string // 章名(基礎/モデル/応用 など)
   title: string
   description: string
   blocks: ContentBlock[]
@@ -106,15 +106,15 @@ type Example = {
   slug: string
   title: string
   description: string
-  methodSlug: string       // 適用した手法
-  seriesRef: string        // data/series/ のファイル名(拡張子なし)
+  methodSlug: string // 適用した手法
+  seriesRef: string // data/series/ のファイル名(拡張子なし)
   chartType: ChartType
-  blocks: ContentBlock[]   // 解釈・考察
+  blocks: ContentBlock[] // 解釈・考察
 }
 
 type Topic = {
   slug: string
-  publishedAt: string      // ISO 8601
+  publishedAt: string // ISO 8601
   title: string
   description: string
   blocks: ContentBlock[]
@@ -130,7 +130,7 @@ type SeriesFile = {
   frequency: "daily" | "weekly" | "monthly" | "quarterly" | "yearly"
   series: {
     label: string
-    points: { t: string; v: number }[]  // t: ISO 8601 日付
+    points: { t: string; v: number }[] // t: ISO 8601 日付
   }[]
 }
 ```

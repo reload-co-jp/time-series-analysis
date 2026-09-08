@@ -316,10 +316,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "[[arima]] ARIMAモデルの基礎",
-          "条件付き分散の考え方"
-        ]
+        "items": ["[[arima]] ARIMAモデルの基礎", "条件付き分散の考え方"]
       },
       {
         "type": "heading",
@@ -402,9 +399,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "分散・共分散の基礎統計"
-        ]
+        "items": ["分散・共分散の基礎統計"]
       },
       {
         "type": "heading",
@@ -473,10 +468,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "[[stationarity]] 定常性",
-          "[[autocorrelation]] ACF/PACF"
-        ]
+        "items": ["[[stationarity]] 定常性", "[[autocorrelation]] ACF/PACF"]
       },
       {
         "type": "heading",
@@ -558,7 +550,10 @@
       },
       {
         "type": "list",
-        "items": ["予測ステップ(状態の時間発展)", "更新ステップ(観測による補正)"]
+        "items": [
+          "予測ステップ(状態の時間発展)",
+          "更新ステップ(観測による補正)"
+        ]
       },
       {
         "type": "heading",
@@ -593,9 +588,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "[[autocorrelation]] 自己相関の基礎"
-        ]
+        "items": ["[[autocorrelation]] 自己相関の基礎"]
       },
       {
         "type": "heading",
@@ -733,10 +726,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "尤度・最尤推定の基礎",
-          "[[arima]] ARMAモデルの基礎"
-        ]
+        "items": ["尤度・最尤推定の基礎", "[[arima]] ARMAモデルの基礎"]
       },
       {
         "type": "heading",
@@ -782,7 +772,10 @@
         ]
       }
     ],
-    "relatedMethods": ["lag-operator-box-jenkins", "wold-representation-theorem"],
+    "relatedMethods": [
+      "lag-operator-box-jenkins",
+      "wold-representation-theorem"
+    ],
     "relatedExamples": []
   },
   {
@@ -802,10 +795,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "線形代数(行列演算)の基礎",
-          "[[arima]] ARMAモデルの基礎"
-        ]
+        "items": ["線形代数(行列演算)の基礎", "[[arima]] ARMAモデルの基礎"]
       },
       {
         "type": "heading",
@@ -850,7 +840,11 @@
         ]
       }
     ],
-    "relatedMethods": ["kalman-filter", "particle-filter", "seasonal-decomposition"],
+    "relatedMethods": [
+      "kalman-filter",
+      "particle-filter",
+      "seasonal-decomposition"
+    ],
     "relatedExamples": []
   },
   {
@@ -941,9 +935,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "[[state-space-model]] 状態空間モデルの概要"
-        ]
+        "items": ["[[state-space-model]] 状態空間モデルの概要"]
       },
       {
         "type": "heading",
@@ -1075,7 +1067,11 @@
         ]
       }
     ],
-    "relatedMethods": ["autocorrelation", "spectral-analysis", "lag-operator-box-jenkins"],
+    "relatedMethods": [
+      "autocorrelation",
+      "spectral-analysis",
+      "lag-operator-box-jenkins"
+    ],
     "relatedExamples": []
   },
   {
@@ -1168,10 +1164,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "最尤推定の基礎",
-          "Fisher情報量の基礎"
-        ]
+        "items": ["最尤推定の基礎", "Fisher情報量の基礎"]
       },
       {
         "type": "heading",

@@ -572,10 +572,7 @@
       },
       {
         "type": "list",
-        "items": [
-          "尤度・最尤推定の基礎",
-          "[[arima-basics]] ARMAモデルの基礎"
-        ]
+        "items": ["尤度・最尤推定の基礎", "[[arima-basics]] ARMAモデルの基礎"]
       },
       {
         "type": "heading",

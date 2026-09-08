@@ -1,6 +1,7 @@
 import { FC } from "react"
 import Link from "next/link"
 import { accentColors, serifFont } from "@/components/elements/layout"
+import { JsonLd, websiteJsonLd } from "@/lib/jsonld"
 
 const sections = [
   {
@@ -33,6 +34,7 @@ const sections = [
 const Page: FC = () => {
   return (
     <>
+      <JsonLd data={websiteJsonLd()} />
       <p style={{ color: "#555", fontSize: "1rem", marginBottom: "2.5rem" }}>
         時系列分析を体系的に学べる講義と手法の解説、可視化結果の例示、最新手法の紹介と示唆を行うサイト。
       </p>

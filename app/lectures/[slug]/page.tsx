@@ -4,6 +4,7 @@ import { Blocks } from "@/components/content/blocks"
 import { PageTitle } from "@/components/elements/layout"
 import { Tag } from "@/components/elements/tag"
 import { RelatedLinks } from "@/components/elements/related-links"
+import { JsonLd, articleJsonLd, breadcrumbJsonLd } from "@/lib/jsonld"
 
 export const generateStaticParams = () =>
   getLectures().map((lecture) => ({ slug: lecture.slug }))
@@ -33,6 +34,19 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   return (
     <article>
+      <JsonLd
+        data={articleJsonLd({
+          headline: lecture.title,
+          description: lecture.description,
+          path: `/lectures/${lecture.slug}/`,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "講義", path: "/lectures/" },
+          { name: lecture.title, path: `/lectures/${lecture.slug}/` },
+        ])}
+      />
       <Tag>{lecture.chapter}</Tag>
       <PageTitle style={{ marginTop: ".5rem" }}>{lecture.title}</PageTitle>
       <Blocks blocks={lecture.blocks} />

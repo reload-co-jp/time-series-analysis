@@ -14,7 +14,9 @@ export const BarChart: FC<{ data: SeriesFile; caption?: string }> = ({
   caption,
 }) => {
   const points = data.series[0]?.points ?? []
-  const yDomain = getDomain(points.map((p) => Math.min(0, p.v)).concat(points.map((p) => p.v)))
+  const yDomain = getDomain(
+    points.map((p) => Math.min(0, p.v)).concat(points.map((p) => p.v))
+  )
   const yScale = createLinearScale(yDomain, [
     HEIGHT - PADDING.bottom,
     PADDING.top,
@@ -30,11 +32,7 @@ export const BarChart: FC<{ data: SeriesFile; caption?: string }> = ({
   const zeroY = yScale(0)
 
   return (
-    <figure
-      style={{ margin: 0 }}
-      role="img"
-      aria-label={caption ?? data.name}
-    >
+    <figure style={{ margin: 0 }} role="img" aria-label={caption ?? data.name}>
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         width="100%"

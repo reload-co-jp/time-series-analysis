@@ -38,7 +38,7 @@ export const getExample = (slug: string): Example | undefined =>
 export const getTopics = (): Topic[] =>
   [...topics].sort(
     (a, b) =>
-      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   )
 
 export const getTopic = (slug: string): Topic | undefined =>

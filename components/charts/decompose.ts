@@ -13,7 +13,7 @@ export type Decomposition = {
  */
 export const decompose = (
   points: SeriesPoint[],
-  period: number,
+  period: number
 ): Decomposition => {
   const n = points.length
   const half = Math.floor(period / 2)
@@ -34,7 +34,7 @@ export const decompose = (
     seasonalCounts[idx] += 1
   })
   const seasonalByIndex = seasonalSums.map((sum, i) =>
-    seasonalCounts[i] > 0 ? sum / seasonalCounts[i] : 0,
+    seasonalCounts[i] > 0 ? sum / seasonalCounts[i] : 0
   )
 
   return {

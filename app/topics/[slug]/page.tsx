@@ -4,6 +4,7 @@ import { Blocks } from "@/components/content/blocks"
 import { PageTitle } from "@/components/elements/layout"
 import { Tag } from "@/components/elements/tag"
 import { RelatedLinks } from "@/components/elements/related-links"
+import { JsonLd, articleJsonLd, breadcrumbJsonLd } from "@/lib/jsonld"
 
 export const generateStaticParams = () =>
   getTopics().map((topic) => ({ slug: topic.slug }))
@@ -33,6 +34,20 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   return (
     <article>
+      <JsonLd
+        data={articleJsonLd({
+          headline: topic.title,
+          description: topic.description,
+          path: `/topics/${topic.slug}/`,
+          datePublished: topic.publishedAt,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "最新動向", path: "/topics/" },
+          { name: topic.title, path: `/topics/${topic.slug}/` },
+        ])}
+      />
       <Tag>{topic.publishedAt}</Tag>
       <PageTitle style={{ marginTop: ".5rem" }}>{topic.title}</PageTitle>
       <Blocks blocks={topic.blocks} />

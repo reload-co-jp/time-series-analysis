@@ -7,7 +7,8 @@ export type ContentBlock =
   | { type: "chart"; seriesRef: string; chartType: ChartType; caption?: string }
   | { type: "note"; text: string }
 
-export type ChartType = "line" | "multi-line" | "bar" | "scatter" | "decomposition"
+export type ChartType =
+  "line" | "multi-line" | "bar" | "scatter" | "decomposition"
 
 export type MethodCategory =
   | "理論的基盤"

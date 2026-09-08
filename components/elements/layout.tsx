@@ -2,8 +2,7 @@ import { ComponentProps, FC, ReactNode } from "react"
 
 export const accentColors = ["#5a9c5a", "#4a7fc4", "#d4703f", "#c86fa0"]
 
-export const serifFont =
-  '"Hiragino Mincho ProN", "Yu Mincho", YuMincho, serif'
+export const serifFont = '"Hiragino Mincho ProN", "Yu Mincho", YuMincho, serif'
 
 export const Title: FC<ComponentProps<"h1">> = ({
   style,

@@ -6,7 +6,7 @@ export type LinearScale = (value: number) => number
  */
 export const createLinearScale = (
   domain: [number, number],
-  range: [number, number],
+  range: [number, number]
 ): LinearScale => {
   const [domainMin, domainMax] = domain
   const [rangeMin, rangeMax] = range
@@ -35,10 +35,7 @@ export const getDomain = (values: number[]): [number, number] => {
 /**
  * Produces `count` evenly spaced tick values spanning the domain, inclusive of both ends.
  */
-export const getTicks = (
-  domain: [number, number],
-  count: number,
-): number[] => {
+export const getTicks = (domain: [number, number], count: number): number[] => {
   const [min, max] = domain
   if (count <= 1) return [min]
   const step = (max - min) / (count - 1)

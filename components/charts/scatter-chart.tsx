@@ -40,11 +40,7 @@ export const ScatterChart: FC<{ data: SeriesFile; caption?: string }> = ({
   }))
 
   return (
-    <figure
-      style={{ margin: 0 }}
-      role="img"
-      aria-label={caption ?? data.name}
-    >
+    <figure style={{ margin: 0 }} role="img" aria-label={caption ?? data.name}>
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         width="100%"

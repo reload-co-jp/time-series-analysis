@@ -22,7 +22,7 @@ describe("decompose", () => {
     const { trend, seasonal, residual } = decompose(points, 4)
     for (let i = 2; i < 10; i++) {
       expect(trend[i].v + seasonal[i].v + residual[i].v).toBeCloseTo(
-        points[i].v,
+        points[i].v
       )
     }
   })
