@@ -85,11 +85,295 @@
         ]
       }
     ],
-    "relatedMethods": ["autocorrelation", "wold-representation-theorem"]
+    "relatedMethods": [
+      "autocorrelation",
+      "wold-representation-theorem"
+    ]
+  },
+  {
+    "slug": "ar-model",
+    "order": 2,
+    "chapter": "古典的モデル",
+    "title": "ARモデル(自己回帰モデル)",
+    "description": "過去の自分自身の値の線形結合で現在の値を説明する自己回帰(AR)モデルの仕組みと定常条件を学ぶ。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "平易に言うと: ARモデルは「昨日の値が今日の値に影響する」という発想を数式にしたもの。過去p時点の値の線形結合で現在の値を説明する。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "前提知識"
+      },
+      {
+        "type": "list",
+        "items": [
+          "[[stationarity]] 定常性の考え方",
+          "自己相関(ACF)・偏自己相関(PACF)の基礎"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "利用シーン"
+      },
+      {
+        "type": "paragraph",
+        "text": "気温・株価・売上など、直前の値の影響が緩やかに続く系列のモデル化に使う。ARMAやARIMAの構成要素としても中心的な役割を持つ。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "AR(p)モデルの定義"
+      },
+      {
+        "type": "math",
+        "tex": "X_t = c + \\phi_1 X_{t-1} + \\phi_2 X_{t-2} + \\cdots + \\phi_p X_{t-p} + \\epsilon_t"
+      },
+      {
+        "type": "paragraph",
+        "text": "cは定数項、\\phi_iは自己回帰係数、\\epsilon_tはホワイトノイズ(平均0・分散一定・無相関な誤差項)である。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "定常性の条件"
+      },
+      {
+        "type": "paragraph",
+        "text": "AR(p)過程が定常であるためには、特性方程式の解(根)がすべて単位円の外側にある必要がある。"
+      },
+      {
+        "type": "math",
+        "tex": "1 - \\phi_1 z - \\phi_2 z^2 - \\cdots - \\phi_p z^p = 0"
+      },
+      {
+        "type": "note",
+        "text": "AR(1)の場合は|\\phi_1| < 1が定常条件となる。係数の絶対値が1以上だと過去の影響が減衰せず、値が発散してしまう。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "次数pの選び方"
+      },
+      {
+        "type": "paragraph",
+        "text": "偏自己相関関数(PACF)がラグp以降で急激に0へ近づく(カットオフする)ことを目安にpを決める。情報量規準(AIC/BIC)による比較も併用する。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "用語集"
+      },
+      {
+        "type": "list",
+        "items": [
+          "AR(自己回帰): 過去の値の線形結合で現在の値を説明する成分",
+          "ホワイトノイズ: 平均0・分散一定・自己相関を持たない誤差項",
+          "特性方程式: 定常性・安定性を判定するために立てる多項式方程式",
+          "PACF(偏自己相関): 他のラグの影響を除いた、あるラグどうしの相関"
+        ]
+      }
+    ],
+    "relatedMethods": [
+      "autocorrelation",
+      "arima"
+    ]
+  },
+  {
+    "slug": "ma-model",
+    "order": 3,
+    "chapter": "古典的モデル",
+    "title": "MAモデル(移動平均モデル)",
+    "description": "過去の予測誤差(ショック)の線形結合で現在の値を説明する移動平均(MA)モデルを学ぶ。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "平易に言うと: MAモデルは「直近の予想外の出来事(誤差)が、しばらく尾を引いて現在の値に影響する」という発想を数式にしたもの。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "前提知識"
+      },
+      {
+        "type": "list",
+        "items": [
+          "[[stationarity]] 定常性の考え方",
+          "ホワイトノイズの概念"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "利用シーン"
+      },
+      {
+        "type": "paragraph",
+        "text": "一時的なショックの影響が数期間だけ残るような系列のモデル化に使う。ARモデルと組み合わせたARMA・ARIMAの構成要素としても使われる。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "MA(q)モデルの定義"
+      },
+      {
+        "type": "math",
+        "tex": "X_t = \\mu + \\epsilon_t + \\theta_1 \\epsilon_{t-1} + \\theta_2 \\epsilon_{t-2} + \\cdots + \\theta_q \\epsilon_{t-q}"
+      },
+      {
+        "type": "paragraph",
+        "text": "\\muは平均、\\theta_iは移動平均係数、\\epsilon_tはホワイトノイズである。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "反転可能性(invertibility)"
+      },
+      {
+        "type": "paragraph",
+        "text": "MA過程は係数の値によらず常に定常である。一方、現在の誤差を過去の観測値だけで一意に表せるためには反転可能性の条件を満たす必要がある。"
+      },
+      {
+        "type": "math",
+        "tex": "1 + \\theta_1 z + \\theta_2 z^2 + \\cdots + \\theta_q z^q = 0"
+      },
+      {
+        "type": "note",
+        "text": "この特性方程式の解がすべて単位円の外側にあるとき反転可能という。MA(1)なら|\\theta_1| < 1が条件。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "次数qの選び方"
+      },
+      {
+        "type": "paragraph",
+        "text": "自己相関関数(ACF)がラグq以降で急激に0へ近づく(カットオフする)ことを目安にqを決める。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "ARモデルとの違い"
+      },
+      {
+        "type": "list",
+        "items": [
+          "AR: 過去の値に依存し、反転可能なMAなら無限次のMAとして書き直せる",
+          "MA: 過去の誤差に依存し、係数の値によらず常に定常"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "用語集"
+      },
+      {
+        "type": "list",
+        "items": [
+          "MA(移動平均): 過去の誤差の線形結合で現在の値を説明する成分",
+          "反転可能性: 誤差項を過去の観測値だけで一意に表現できる性質",
+          "ACF(自己相関関数): 同じ系列の異なる時点の値どうしの相関"
+        ]
+      }
+    ],
+    "relatedMethods": [
+      "autocorrelation",
+      "arima"
+    ]
+  },
+  {
+    "slug": "arma-model",
+    "order": 4,
+    "chapter": "古典的モデル",
+    "title": "ARMAモデル",
+    "description": "自己回帰(AR)と移動平均(MA)を組み合わせ、少ないパラメータで幅広い定常過程を表現するARMAモデルを学ぶ。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "平易に言うと: ARMAはARとMAを合体させたモデル。過去の値と過去の誤差の両方を使うことで、AR単体・MA単体より少ない次数で複雑な相関構造を表現できる。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "前提知識"
+      },
+      {
+        "type": "list",
+        "items": [
+          "[[ar-model]] ARモデルの基礎",
+          "[[ma-model]] MAモデルの基礎"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "利用シーン"
+      },
+      {
+        "type": "paragraph",
+        "text": "ARIMAの土台となる定常過程向けモデル。差分を取らずに定常な系列を直接モデル化したい場合に使う。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "ARMA(p, q)モデルの定義"
+      },
+      {
+        "type": "math",
+        "tex": "X_t = c + \\phi_1 X_{t-1} + \\cdots + \\phi_p X_{t-p} + \\epsilon_t + \\theta_1 \\epsilon_{t-1} + \\cdots + \\theta_q \\epsilon_{t-q}"
+      },
+      {
+        "type": "paragraph",
+        "text": "ラグ演算子Lを使うと\\Phi(L) X_t = \\Theta(L) \\epsilon_tと簡潔に書ける([[box-jenkins-method]]参照)。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "Wold表現との関係"
+      },
+      {
+        "type": "paragraph",
+        "text": "定常なARMA過程は、無限次のMA過程(Wold表現)として書き直せる。ARMAはこのWold表現を少数のパラメータで近似的に表す手段と捉えられる。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "次数(p, q)の選び方"
+      },
+      {
+        "type": "paragraph",
+        "text": "ACF・PACFのどちらも緩やかに減衰する場合はARMA成分が疑われる。複数の(p, q)候補を情報量規準(AIC/BIC)で比較して選ぶのが一般的。"
+      },
+      {
+        "type": "note",
+        "text": "ARモデルはARMA(p, 0)、MAモデルはARMA(0, q)の特殊ケースにあたる。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "用語集"
+      },
+      {
+        "type": "list",
+        "items": [
+          "ARMA: 自己回帰と移動平均を組み合わせたモデル",
+          "ラグ演算子: X_{t-1} = L X_tのように過去の値を取り出す演算子",
+          "Wold表現: 定常過程を無限次のMA過程として表す定理"
+        ]
+      }
+    ],
+    "relatedMethods": [
+      "arima",
+      "wold-representation-theorem",
+      "lag-operator-box-jenkins",
+      "information-criteria"
+    ]
   },
   {
     "slug": "arima-basics",
-    "order": 2,
+    "order": 5,
     "chapter": "古典的モデル",
     "title": "ARIMAモデル入門",
     "description": "自己回帰・移動平均・和分過程を組み合わせたARIMAモデルの基礎を学ぶ。",
@@ -107,6 +391,7 @@
         "type": "list",
         "items": [
           "[[stationarity]] 定常性の考え方",
+          "[[arma-model]] ARMAモデルの基礎",
           "自己相関(ACF)・偏自己相関(PACF)の基礎"
         ]
       },
@@ -165,8 +450,105 @@
     ]
   },
   {
+    "slug": "sarima-model",
+    "order": 6,
+    "chapter": "古典的モデル",
+    "title": "SARIMAモデル(季節ARIMAモデル)",
+    "description": "季節性を持つ時系列に対応するため、ARIMAに季節階差・季節AR・季節MA項を加えたSARIMAモデルを学ぶ。",
+    "blocks": [
+      {
+        "type": "paragraph",
+        "text": "平易に言うと: SARIMAは「毎週・毎月・毎年」など周期的に繰り返すパターンを持つ系列向けに、ARIMAへ季節版のAR・MA・差分を追加したモデル。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "前提知識"
+      },
+      {
+        "type": "list",
+        "items": [
+          "[[arima-basics]] ARIMAモデルの基礎",
+          "季節性・トレンドの考え方"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "利用シーン"
+      },
+      {
+        "type": "paragraph",
+        "text": "月次売上(年周期)、電力需要(日・週周期)、観光客数など、明確な季節パターンを持つ系列の予測に使う。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "SARIMA(p, d, q)(P, D, Q)_mの定義"
+      },
+      {
+        "type": "paragraph",
+        "text": "非季節部分(p, d, q)に加え、季節部分(P, D, Q)と季節周期mを指定する。mは季節の長さ(月次データで年周期なら12など)を表す。"
+      },
+      {
+        "type": "math",
+        "tex": "\\Phi(L^m) \\phi(L) (1-L)^d (1-L^m)^D X_t = \\Theta(L^m) \\theta(L) \\epsilon_t"
+      },
+      {
+        "type": "paragraph",
+        "text": "\\phi, \\thetaは非季節AR/MA多項式、\\Phi, \\Thetaは季節AR/MA多項式、(1-L)^dは非季節差分、(1-L^m)^Dは季節差分を表す。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "パラメータの役割"
+      },
+      {
+        "type": "list",
+        "ordered": true,
+        "items": [
+          "p, d, q: 非季節のAR次数・差分階数・MA次数",
+          "P, D, Q: 季節のAR次数・季節差分階数・季節MA次数",
+          "m: 季節周期(年周期の月次データなら12、四半期なら4)"
+        ]
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "季節差分と通常差分の違い"
+      },
+      {
+        "type": "paragraph",
+        "text": "通常差分(1-L)はトレンドを除去し、季節差分(1-L^m)は周期mの季節パターンを除去する。両方を組み合わせて系列を定常化する。"
+      },
+      {
+        "type": "note",
+        "text": "季節差分d, Dを取りすぎると分散が不必要に増大する「過差分」が起きる。ACF/PACFや情報量規準で確認しながら決める。"
+      },
+      {
+        "type": "heading",
+        "level": 2,
+        "text": "用語集"
+      },
+      {
+        "type": "list",
+        "items": [
+          "SARIMA: 季節性に対応したARIMAモデル",
+          "季節差分: 周期m離れた値どうしの差分を取る操作",
+          "季節AR/MA項: 周期mだけ離れた時点の値・誤差を使う成分",
+          "季節周期m: 季節パターンが繰り返される間隔"
+        ]
+      }
+    ],
+    "relatedMethods": [
+      "arima",
+      "seasonal-decomposition",
+      "information-criteria"
+    ]
+  },
+  {
     "slug": "wold-representation",
-    "order": 3,
+    "order": 7,
     "chapter": "発展",
     "title": "Woldの表現定理とヒルベルト空間",
     "description": "定常過程がなぜ線形モデルで近似できるかの数理的根拠を、ヒルベルト空間の幾何学から理解する。",
@@ -247,11 +629,13 @@
         ]
       }
     ],
-    "relatedMethods": ["wold-representation-theorem"]
+    "relatedMethods": [
+      "wold-representation-theorem"
+    ]
   },
   {
     "slug": "box-jenkins-method",
-    "order": 4,
+    "order": 8,
     "chapter": "発展",
     "title": "Box-Jenkins法とラグ演算子",
     "description": "無限パラメータのMA(∞)過程を、有限パラメータのARMAモデルへ縮約する代数的な手続きを学ぶ。",
@@ -331,11 +715,14 @@
         ]
       }
     ],
-    "relatedMethods": ["lag-operator-box-jenkins", "arima"]
+    "relatedMethods": [
+      "lag-operator-box-jenkins",
+      "arima"
+    ]
   },
   {
     "slug": "unit-root-nonstationarity",
-    "order": 5,
+    "order": 9,
     "chapter": "発展",
     "title": "単位根過程と見せかけの回帰",
     "description": "定常性の前提が崩れる単位根過程を識別し、見せかけの回帰の罠を回避する方法を学ぶ。",
@@ -411,11 +798,14 @@
         ]
       }
     ],
-    "relatedMethods": ["unit-root-spurious-regression", "arima"]
+    "relatedMethods": [
+      "unit-root-spurious-regression",
+      "arima"
+    ]
   },
   {
     "slug": "arch-garch-volatility",
-    "order": 6,
+    "order": 10,
     "chapter": "発展",
     "title": "条件付き異分散モデル入門(ARCH/GARCH)",
     "description": "平均構造ではなく分散構造の時間変化を定式化し、金融時系列のボラティリティ・クラスタリングを捉える。",
@@ -481,11 +871,13 @@
         ]
       }
     ],
-    "relatedMethods": ["arch-garch"]
+    "relatedMethods": [
+      "arch-garch"
+    ]
   },
   {
     "slug": "spectral-analysis-intro",
-    "order": 7,
+    "order": 11,
     "chapter": "応用",
     "title": "自己共分散関数とスペクトル解析",
     "description": "時間領域の自己相関構造を周波数領域のスペクトルとして捉え直し、系列に含まれる周期成分を可視化する。",
@@ -552,11 +944,14 @@
         ]
       }
     ],
-    "relatedMethods": ["cross-correlation", "spectral-analysis"]
+    "relatedMethods": [
+      "cross-correlation",
+      "spectral-analysis"
+    ]
   },
   {
     "slug": "model-selection-aic",
-    "order": 8,
+    "order": 12,
     "chapter": "応用",
     "title": "情報量規準によるモデル選択",
     "description": "K-L情報量に基づき、当てはまりの良さと複雑さをバランスさせてモデルを選ぶ考え方を学ぶ。",
@@ -572,7 +967,10 @@
       },
       {
         "type": "list",
-        "items": ["尤度・最尤推定の基礎", "[[arima-basics]] ARMAモデルの基礎"]
+        "items": [
+          "尤度・最尤推定の基礎",
+          "[[arima-basics]] ARMAモデルの基礎"
+        ]
       },
       {
         "type": "heading",
@@ -610,11 +1008,14 @@
         ]
       }
     ],
-    "relatedMethods": ["information-criteria", "lag-operator-box-jenkins"]
+    "relatedMethods": [
+      "information-criteria",
+      "lag-operator-box-jenkins"
+    ]
   },
   {
     "slug": "state-space-kalman-filter",
-    "order": 9,
+    "order": 13,
     "chapter": "応用",
     "title": "状態空間モデルとカルマンフィルタ",
     "description": "観測されない状態の時間発展を明示的にモデル化し、観測値から逐次的に状態を推定する枠組みを学ぶ。",
@@ -672,11 +1073,14 @@
         ]
       }
     ],
-    "relatedMethods": ["state-space-model", "kalman-filter"]
+    "relatedMethods": [
+      "state-space-model",
+      "kalman-filter"
+    ]
   },
   {
     "slug": "seasonal-adjustment",
-    "order": 10,
+    "order": 14,
     "chapter": "応用",
     "title": "季節調整モデルによる成分分解",
     "description": "時系列をトレンド・季節・不規則成分に分解し、季節性を除いた基調の動きを取り出す。",
@@ -736,11 +1140,14 @@
         ]
       }
     ],
-    "relatedMethods": ["seasonal-decomposition", "state-space-model"]
+    "relatedMethods": [
+      "seasonal-decomposition",
+      "state-space-model"
+    ]
   },
   {
     "slug": "time-varying-volatility",
-    "order": 11,
+    "order": 15,
     "chapter": "応用",
     "title": "ボラティリティと時変係数ARモデル",
     "description": "分散や回帰係数そのものが時間とともに変化するモデルを、状態空間の枠組みで捉える。",
@@ -797,11 +1204,14 @@
         ]
       }
     ],
-    "relatedMethods": ["arch-garch", "state-space-model"]
+    "relatedMethods": [
+      "arch-garch",
+      "state-space-model"
+    ]
   },
   {
     "slug": "nonlinear-non-gaussian-state-space",
-    "order": 12,
+    "order": 16,
     "chapter": "応用",
     "title": "非線形・非ガウス型状態空間モデルとパーティクルフィルタ",
     "description": "線形・ガウス型の枠組みを超えて、より柔軟な状態空間モデルを扱うための手法を学ぶ。",
@@ -862,11 +1272,14 @@
         ]
       }
     ],
-    "relatedMethods": ["particle-filter", "state-space-model"]
+    "relatedMethods": [
+      "particle-filter",
+      "state-space-model"
+    ]
   },
   {
     "slug": "long-memory-and-locally-stationary",
-    "order": 13,
+    "order": 17,
     "chapter": "研究トピック",
     "title": "長期記憶過程と局所定常過程",
     "description": "整数階の差分では捉えられない緩やかな記憶減衰(長期記憶性)と、時間とともにスペクトル構造が滑らかに変化する非定常性(局所定常性)を学ぶ。",
@@ -941,11 +1354,14 @@
         ]
       }
     ],
-    "relatedMethods": ["long-memory-process", "locally-stationary-process"]
+    "relatedMethods": [
+      "long-memory-process",
+      "locally-stationary-process"
+    ]
   },
   {
     "slug": "nonlinear-models-and-portfolio-theory",
-    "order": 14,
+    "order": 18,
     "chapter": "研究トピック",
     "title": "非線形時系列モデルと統計的ポートフォリオ理論",
     "description": "ARCHを一般化した非線形モデルによる金融データの記述と、時系列の依存構造を考慮した最適ポートフォリオ理論を学ぶ。",
@@ -1026,6 +1442,10 @@
         ]
       }
     ],
-    "relatedMethods": ["charn-model", "lan-theory", "portfolio-optimization"]
+    "relatedMethods": [
+      "charn-model",
+      "lan-theory",
+      "portfolio-optimization"
+    ]
   }
 ]
